@@ -1,0 +1,456 @@
+/* Enhanced Portfolio Styles - Additional Features */
+
+/* Scroll Progress Bar */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--main-color), var(--hover-color));
+    z-index: 10001;
+    transition: width 0.1s;
+}
+
+/* Loading Screen */
+.loading-screen {
+    display: none !important;
+}
+
+.loading-screen.hidden {
+    display: none !important;
+}
+
+.loader {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(212, 175, 55, 0.2);
+    border-top-color: var(--main-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    background: var(--main-color);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+    transition: 0.3s;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+}
+
+.theme-toggle i {
+    font-size: 1.5rem;
+    color: var(--bg-color);
+}
+
+/* Light Theme Variables */
+body.light-theme {
+    --bg-color: #f5f5f7;
+    --second-bg-color: #ffffff;
+    --text-color: #1d1d1f;
+    --main-color: #d4af37;
+    --hover-color: #b8941f;
+}
+
+body.light-theme .cursor-dot {
+    background-color: var(--main-color);
+}
+
+body.light-theme .cursor-outline {
+    border-color: var(--main-color);
+}
+
+/* WhatsApp Floating Button */
+.whatsapp-float {
+    position: fixed;
+    bottom: 8rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 0 20px rgba(37, 211, 102, 0.3);
+    transition: 0.3s;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(37, 211, 102, 0.5);
+}
+
+.whatsapp-float i {
+    font-size: 1.8rem;
+    color: white;
+}
+
+/* Testimonials Section */
+.testimonials {
+    padding: 6rem 9% 2rem;
+    background: var(--bg-color);
+}
+
+.testimonials-slider {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.testimonial-card {
+    background: var(--second-bg-color);
+    padding: 3rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+    display: none;
+}
+
+.testimonial-card.active {
+    display: block;
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.testimonial-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0 auto 1.5rem;
+    border: 3px solid var(--main-color);
+}
+
+.testimonial-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #bbb;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.testimonial-author {
+    font-size: 1.2rem;
+    color: var(--main-color);
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+
+.testimonial-role {
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.testimonial-nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.testimonial-nav button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--main-color);
+    background: transparent;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.testimonial-nav button.active {
+    background: var(--main-color);
+}
+
+/* Experience Timeline */
+.experience {
+    padding: 6rem 9% 2rem;
+    background: var(--second-bg-color);
+}
+
+.timeline {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background: rgba(212, 175, 55, 0.2);
+}
+
+.timeline-item {
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+    margin-right: calc(50% + 40px);
+    text-align: right;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+    margin-left: calc(50% + 40px);
+}
+
+.timeline-dot {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    background: var(--main-color);
+    border-radius: 50%;
+    border: 4px solid var(--second-bg-color);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+}
+
+.timeline-content {
+    background: var(--bg-color);
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.timeline-year {
+    color: var(--main-color);
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-company {
+    color: #888;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.timeline-desc {
+    color: #bbb;
+    line-height: 1.6;
+}
+
+/* Certifications Section */
+.certifications {
+    padding: 6rem 9% 2rem;
+    background: var(--bg-color);
+}
+
+.cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.cert-card {
+    background: var(--second-bg-color);
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+    transition: 0.3s;
+}
+
+.cert-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--main-color);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
+}
+
+.cert-icon {
+    font-size: 3rem;
+    color: var(--main-color);
+    margin-bottom: 1rem;
+}
+
+.cert-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.cert-issuer {
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.cert-year {
+    color: var(--main-color);
+    font-weight: 600;
+}
+
+/* GitHub Stats */
+.github-stats {
+    padding: 6rem 9% 2rem;
+    background: var(--second-bg-color);
+}
+
+.stats-container-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.stat-card {
+    background: var(--bg-color);
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+}
+
+.stat-icon {
+    font-size: 2.5rem;
+    color: var(--main-color);
+    margin-bottom: 1rem;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    color: var(--main-color);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    color: #bbb;
+    font-size: 1rem;
+}
+
+/* Download CV Button */
+.btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2.8rem;
+    background: transparent;
+    color: var(--main-color);
+    border: 2px solid var(--main-color);
+    border-radius: 4rem;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: 0.3s;
+    margin-left: 1rem;
+    text-decoration: none;
+}
+
+.btn-download:hover {
+    background: var(--main-color);
+    color: var(--bg-color);
+}
+
+/* Particles Container */
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+/* Mobile Responsive Updates */
+@media (max-width: 768px) {
+
+    .theme-toggle,
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        bottom: 1rem;
+        right: 1rem;
+    }
+
+    .whatsapp-float {
+        bottom: 5rem;
+    }
+
+    .timeline::before {
+        left: 30px;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content,
+    .timeline-item:nth-child(even) .timeline-content {
+        margin-left: 60px;
+        margin-right: 0;
+        text-align: left;
+    }
+
+    .timeline-dot {
+        left: 30px;
+    }
+}
+ 
+ / *   P r o f i l e   I m a g e   P r e m i u m   S t y l e s   * / 
+ . p r o f i l e - i m a g e   { 
+         w i d t h :   3 5 0 p x ; 
+         h e i g h t :   3 5 0 p x ; 
+         o b j e c t - f i t :   c o v e r ; 
+         b o r d e r - r a d i u s :   5 0 % ; 
+         b o r d e r :   5 p x   s o l i d   v a r ( - - m a i n - c o l o r ) ; 
+         b o x - s h a d o w :   0   0   4 0 p x   r g b a ( 2 1 2 ,   1 7 5 ,   5 5 ,   0 . 5 ) ,   0   0   8 0 p x   r g b a ( 2 1 2 ,   1 7 5 ,   5 5 ,   0 . 3 ) ; 
+         a n i m a t i o n :   f l o a t   6 s   e a s e - i n - o u t   i n f i n i t e ,   p r o f i l e G l o w   3 s   e a s e - i n - o u t   i n f i n i t e ; 
+         p o s i t i o n :   r e l a t i v e ; 
+         z - i n d e x :   2 ; 
+         t r a n s i t i o n :   t r a n s f o r m   0 . 3 s   e a s e ; 
+ } 
+ 
+ . p r o f i l e - i m a g e : h o v e r   { 
+         t r a n s f o r m :   s c a l e ( 1 . 0 5 ) ; 
+ } 
+ 
+ @ k e y f r a m e s   p r o f i l e G l o w   { 
+         0 % ,   1 0 0 %   {   b o x - s h a d o w :   0   0   4 0 p x   r g b a ( 2 1 2 ,   1 7 5 ,   5 5 ,   0 . 5 ) ,   0   0   8 0 p x   r g b a ( 2 1 2 ,   1 7 5 ,   5 5 ,   0 . 3 ) ;   } 
+         5 0 %   {   b o x - s h a d o w :   0   0   6 0 p x   r g b a ( 2 1 2 ,   1 7 5 ,   5 5 ,   0 . 7 ) ,   0   0   1 0 0 p x   r g b a ( 2 1 2 ,   1 7 5 ,   5 5 ,   0 . 4 ) ;   } 
+ } 
+ 
+ @ m e d i a   ( m a x - w i d t h :   7 6 8 p x )   { 
+         . p r o f i l e - i m a g e   {   w i d t h :   2 5 0 p x ;   h e i g h t :   2 5 0 p x ;   } 
+ }  
+ 

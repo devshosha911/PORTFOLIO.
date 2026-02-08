@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Admin Panel - Ultimate Edition</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .admin-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.2);
+            overflow-x: auto;
+        }
+
+        .admin-tab {
+            padding: 1rem 2rem;
+            background: transparent;
+            color: #bbb;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: 0.3s;
+            white-space: nowrap;
+            border-bottom: 3px solid transparent;
+        }
+
+        .admin-tab.active {
+            color: #d4af37;
+            border-bottom-color: #d4af37;
+        }
+
+        .admin-tab:hover {
+            color: #d4af37;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #d4af37;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-radius: 0.5rem;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .color-picker-group {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .color-picker-group input[type="color"] {
+            width: 80px;
+            height: 50px;
+            cursor: pointer;
+        }
+
+        .skill-item,
+        .social-item,
+        .timeline-item-admin,
+        .cert-item-admin,
+        .testimonial-item-admin {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .btn-add {
+            background: #d4af37;
+            color: #1a1a20;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .btn-add:hover {
+            background: #b8941f;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="admin-container">
+        <header class="admin-header">
+            <h1><i class="fa-solid fa-crown"></i> Ultimate Admin Panel</h1>
+            <div class="header-actions">
+                <a href="index.html" class="btn-view" target="_blank">
+                    <i class="fa-solid fa-eye"></i> View Site
+                </a>
+                <button class="btn-save-all" onclick="saveAllSections()">
+                    <i class="fa-solid fa-save"></i> Save All Changes
+                </button>
+            </div>
+        </header>
+
+        <div class="admin-tabs">
+            <button class="admin-tab active" onclick="switchTab('projects')">
+                <i class="fa-solid fa-briefcase"></i> Projects
+            </button>
+            <button class="admin-tab" onclick="switchTab('hero')">
+                <i class="fa-solid fa-rocket"></i> Hero Section
+            </button>
+            <button class="admin-tab" onclick="switchTab('about')">
+                <i class="fa-solid fa-user"></i> About & Skills
+            </button>
+            <button class="admin-tab" onclick="switchTab('testimonials')">
+                <i class="fa-solid fa-star"></i> Testimonials
+            </button>
+            <button class="admin-tab" onclick="switchTab('experience')">
+                <i class="fa-solid fa-timeline"></i> Experience
+            </button>
+            <button class="admin-tab" onclick="switchTab('certifications')">
+                <i class="fa-solid fa-certificate"></i> Certifications
+            </button>
+            <button class="admin-tab" onclick="switchTab('social')">
+                <i class="fa-solid fa-share-nodes"></i> Social Links
+            </button>
+            <button class="admin-tab" onclick="switchTab('settings')">
+                <i class="fa-solid fa-gear"></i> Settings
+            </button>
+            <button class="admin-tab" onclick="switchTab('blog')">
+                <i class="fa-solid fa-newspaper"></i> Blog
+            </button>
+        </div>
+
+        <!-- PROJECTS TAB (existing) -->
+        <div id="projects-tab" class="tab-content active">
+            <div class="projects-header">
+                <h2>Manage Projects</h2>
+                <button class="btn-add" onclick="openModal()">
+                    <i class="fa-solid fa-plus"></i> Add New Project
+                </button>
+            </div>
+            <div id="projects-list" class="projects-list"></div>
+        </div>
+
+        <!-- HERO SECTION TAB -->
+        <div id="hero-tab" class="tab-content">
+            <h2>Hero Section Settings</h2>
+            <div class="form-group">
+                <label>Greeting Text</label>
+                <input type="text" id="hero-greeting" placeholder="Hello, I'm a">
+            </div>
+            <div class="form-group">
+                <label>Main Title Line 1</label>
+                <input type="text" id="hero-title1" placeholder="System Analyst">
+            </div>
+            <div class="form-group">
+                <label>Main Title Line 2</label>
+                <input type="text" id="hero-title2" placeholder="Creative Developer">
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <textarea id="hero-description" placeholder="Specializing in..."></textarea>
+            </div>
+            <h3>Statistics</h3>
+            <div class="form-group">
+                <label>Years of Experience</label>
+                <input type="number" id="stat-years" placeholder="5">
+            </div>
+            <div class="form-group">
+                <label>Projects Completed</label>
+                <input type="number" id="stat-projects" placeholder="50">
+            </div>
+            <div class="form-group">
+                <label>Satisfaction Rate (%)</label>
+                <input type="number" id="stat-satisfaction" placeholder="100">
+            </div>
+            <button class="btn-add" onclick="saveHeroSection()">
+                <i class="fa-solid fa-save"></i> Save Hero Section
+            </button>
+        </div>
+
+        <!-- ABOUT & SKILLS TAB -->
+        <div id="about-tab" class="tab-content">
+            <h2>About Section</h2>
+            <div class="form-group">
+                <label>Job Title</label>
+                <input type="text" id="about-title" placeholder="Full Stack Developer | System Analyst | Designer">
+            </div>
+            <div class="form-group">
+                <label>About Text</label>
+                <textarea id="about-text" placeholder="I specialize in creating..."></textarea>
+            </div>
+            <h3>Skills</h3>
+            <button class="btn-add" onclick="addSkill()">
+                <i class="fa-solid fa-plus"></i> Add Skill
+            </button>
+            <div id="skills-list"></div>
+        </div>
+
+        <!-- TESTIMONIALS TAB -->
+        <div id="testimonials-tab" class="tab-content">
+            <h2>Client Testimonials</h2>
+            <button class="btn-add" onclick="addTestimonial()">
+                <i class="fa-solid fa-plus"></i> Add Testimonial
+            </button>
+            <div id="testimonials-list"></div>
+        </div>
+
+        <!-- EXPERIENCE TAB -->
+        <div id="experience-tab" class="tab-content">
+            <h2>Experience Timeline</h2>
+            <button class="btn-add" onclick="addExperience()">
+                <i class="fa-solid fa-plus"></i> Add Experience
+            </button>
+            <div id="experience-list"></div>
+        </div>
+
+        <!-- CERTIFICATIONS TAB -->
+        <div id="certifications-tab" class="tab-content">
+            <h2>Certifications & Awards</h2>
+            <button class="btn-add" onclick="addCertification()">
+                <i class="fa-solid fa-plus"></i> Add Certification
+            </button>
+            <div id="certifications-list"></div>
+        </div>
+
+        <!-- SOCIAL LINKS TAB -->
+        <div id="social-tab" class="tab-content">
+            <h2>Social Media Links</h2>
+            <div class="form-group">
+                <label><i class="fa-brands fa-github"></i> GitHub</label>
+                <input type="url" id="social-github" placeholder="https://github.com/yourusername">
+            </div>
+            <div class="form-group">
+                <label><i class="fa-brands fa-linkedin"></i> LinkedIn</label>
+                <input type="url" id="social-linkedin" placeholder="https://linkedin.com/in/yourusername">
+            </div>
+            <div class="form-group">
+                <label><i class="fa-brands fa-twitter"></i> Twitter</label>
+                <input type="url" id="social-twitter" placeholder="https://twitter.com/yourusername">
+            </div>
+            <div class="form-group">
+                <label><i class="fa-brands fa-discord"></i> Discord</label>
+                <input type="url" id="social-discord" placeholder="https://discord.gg/yourinvite">
+            </div>
+            <div class="form-group">
+                <label><i class="fa-brands fa-whatsapp"></i> WhatsApp Number</label>
+                <input type="tel" id="social-whatsapp" placeholder="1234567890">
+            </div>
+            <button class="btn-add" onclick="saveSocialLinks()">
+                <i class="fa-solid fa-save"></i> Save Social Links
+            </button>
+        </div>
+
+        <!-- SETTINGS TAB -->
+        <div id="settings-tab" class="tab-content">
+            <h2>Site Settings</h2>
+            <h3>Color Theme</h3>
+            <div class="form-group">
+                <label>Primary Color (Gold)</label>
+                <div class="color-picker-group">
+                    <input type="color" id="color-primary" value="#d4af37">
+                    <input type="text" id="color-primary-text" value="#d4af37" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Background Color</label>
+                <div class="color-picker-group">
+                    <input type="color" id="color-bg" value="#0f0f13">
+                    <input type="text" id="color-bg-text" value="#0f0f13" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Secondary Background</label>
+                <div class="color-picker-group">
+                    <input type="color" id="color-second-bg" value="#1a1a20">
+                    <input type="text" id="color-second-bg-text" value="#1a1a20" readonly>
+                </div>
+            </div>
+            <h3>GitHub Integration</h3>
+            <div class="form-group">
+                <label>GitHub Username</label>
+                <input type="text" id="github-username" placeholder="yourusername">
+                <small style="color: #888; display: block; margin-top: 0.5rem;">
+                    Enter your GitHub username to fetch live statistics
+                </small>
+            </div>
+            <h3>Analytics</h3>
+            <div class="form-group">
+                <label>Google Analytics ID</label>
+                <input type="text" id="analytics-id" placeholder="G-XXXXXXXXXX">
+            </div>
+            <button class="btn-add" onclick="saveSettings()">
+                <i class="fa-solid fa-save"></i> Save Settings
+            </button>
+        </div>
+
+        <!-- BLOG TAB -->
+        <div id="blog-tab" class="tab-content">
+            <h2>Blog Management</h2>
+            <button class="btn-add" onclick="addBlogPost()">
+                <i class="fa-solid fa-plus"></i> New Blog Post
+            </button>
+            <div id="blog-list-admin"></div>
+        </div>
+
+        <!-- Existing Modal for Projects -->
+        <div id="project-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h2 id="modal-title">Add New Project</h2>
+                <form id="project-form">
+                    <input type="hidden" id="edit-id">
+                    <div class="form-group">
+                        <label>Project Title</label>
+                        <input type="text" id="project-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="project-description" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Image</label>
+                        <div class="image-upload-options">
+                            <label>
+                                <input type="radio" name="image-type" value="url" checked> Image URL
+                            </label>
+                            <label>
+                                <input type="radio" name="image-type" value="upload"> Upload File
+                            </label>
+                        </div>
+                        <input type="url" id="project-image-url" placeholder="https://example.com/image.jpg">
+                        <input type="file" id="project-image-file" accept="image/*" style="display: none;">
+                        <div id="image-preview"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Tech Stack (comma-separated)</label>
+                        <input type="text" id="project-tech" placeholder="React, Node.js, MongoDB">
+                    </div>
+                    <button type="submit" class="btn-add">Save Project</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin-ultimate.js"></script>
+</body>
+
+</html>
